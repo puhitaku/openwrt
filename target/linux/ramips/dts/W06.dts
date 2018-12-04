@@ -21,16 +21,6 @@
 			label = "w06:green:wps";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 		};
-
-		wan {
-			label = "w06:green:wan";
-			gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
-		};
-
-		wireless {
-			label = "w06:green:wlan";
-			gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
-		};
 	};
 
 	gpio-keys-polled {
@@ -70,6 +60,7 @@
 
 &spi0 {
 	status = "okay";
+	pinctrl-0 = <&spi_pins>, <&spi_cs1_pins>;
 
 	m25p80@0 {
 		#address-cells = <1>;
@@ -107,6 +98,18 @@
 			reg = <0xf00000 0x100000>;
 			read-only;
 		};
+	};
+
+	st7735r@1 {
+		compatible = "sitronix,st7735r";
+		reg = <1>;
+		spi-max-frequency = <10000000>;
+		buswidth = <8>;
+		debug = <3>;
+
+		dc-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
+		reset-gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
+		txbuflen = <0>;
 	};
 };
 
