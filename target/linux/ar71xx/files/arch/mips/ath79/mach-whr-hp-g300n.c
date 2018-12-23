@@ -21,6 +21,7 @@
 #include "dev-gpio-buttons.h"
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
+#include "dev-usb.h"
 #include "machtypes.h"
 
 #define WHRHPG300N_GPIO_LED_SECURITY		0
@@ -122,6 +123,8 @@ static void __init whrhpg300n_setup(void)
 				    AR724X_GPIO_FUNC_ETH_SWITCH_LED2_EN |
 				    AR724X_GPIO_FUNC_ETH_SWITCH_LED3_EN |
 				    AR724X_GPIO_FUNC_ETH_SWITCH_LED4_EN);
+
+	ath79_register_usb();
 
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(whrhpg300n_leds_gpio),
 				 whrhpg300n_leds_gpio);
