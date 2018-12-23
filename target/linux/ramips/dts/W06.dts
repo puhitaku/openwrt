@@ -14,9 +14,22 @@
 		reg = <0x0 0x4000000>;
 	};
 
+    i2c@1 {
+		status = "okay";
+		compatible = "i2c-gpio";
+		gpios = <&gpio0 11 0
+				 &gpio1 11 0>;
+		i2c-gpio,sda-open-drain;
+		i2c-gpio,scl-open-drain;
+		i2c-gpio,delay-us = <2>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+    };
+
 	gpio-leds {
 		compatible = "gpio-leds";
 
+		/*
 		wps {
 			label = "w06:green:wps";
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
@@ -26,6 +39,7 @@
 			label = "w06:green:wan";
 			gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
 		};
+		*/
 
 		wireless {
 			label = "w06:green:wlan";
